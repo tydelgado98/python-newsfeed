@@ -1,3 +1,4 @@
+from app.routes import home, dashboard
 from flask import Flask
 
 def create_app(test_config=None):
@@ -8,10 +9,13 @@ def create_app(test_config=None):
     SECRET_KEY='super_secret_key'
   )
 
+  @app.route('/hello')
+  def hello():
+    return 'Hello, World!'
+
+  # register routes
+  app.register_blueprint(home)
+  app.register_blueprint(dashboard)
+
   return app
 
-app = Flask(__name__)
-
-@app.route('/')
-def hello():
-    return 'Hello, World!'
